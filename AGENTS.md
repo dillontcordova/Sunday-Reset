@@ -1,0 +1,642 @@
+# Sunday Reset Engineering Agent Contract
+
+## Purpose
+
+This document defines the operating procedure and technical standards for AI agents working in the Sunday Reset codebase.
+
+Sunday Reset is a calm, local-first weekly reset ritual PWA.
+
+It is NOT:
+- a productivity app
+- a task manager
+- a habit tracker
+- an AI wrapper
+- a dashboard-heavy SaaS product
+- a hustle-culture optimizer
+
+It IS:
+- a weekly ritual
+- a mental reset
+- a calm reflection system
+- an intentional planning experience
+- a reduction-of-overwhelm tool
+
+The emotional goal:
+
+> “I no longer feel mentally scattered going into the week.”
+
+---
+
+## Core Principle
+
+> Every task must begin with orientation and end with validation.
+
+No exceptions.
+
+Agents should optimize for:
+- simplicity
+- calm UX
+- local-first behavior
+- emotional clarity
+- low operational burden
+- maintainable code
+- mobile-first usability
+
+Agents should avoid:
+- feature creep
+- speculative infrastructure
+- backend-first architecture
+- over-engineering
+- generic productivity-app patterns
+- unnecessary AI integration
+- dashboard-heavy design
+
+---
+
+## Reference Documents
+
+Before planning or implementing, read the relevant documents.
+
+| Document | Purpose |
+|---|---|
+| `docs/PRD_SUNDAY_RESET.md` | Product vision, user experience, roadmap, pricing, positioning |
+| `docs/TECH_PLAN_SUNDAY_RESET.md` | v0 architecture, stack, data model, PWA strategy, implementation guidance |
+| `AGENTS.md` | Engineering rules, task lifecycle, validation expectations |
+
+If a referenced file does not exist yet, do not invent hidden requirements. State that the file is missing and proceed from available context.
+
+---
+
+# I. Product Guardrails
+
+## 1. Version 0 Constraints
+
+Version 0 must remain:
+
+- frontend-only
+- local-first
+- PWA-first
+- mobile-first
+- no backend
+- no auth
+- no cloud sync
+- no AI guidance
+- no payment system
+- no subscriptions
+- no calendar integrations
+- no notifications
+- no collaboration features
+
+The purpose of v0 is to validate recurring ritual behavior before adding complexity.
+
+---
+
+## 2. Product Tone
+
+The app should feel:
+
+- calm
+- warm
+- spacious
+- intentional
+- emotionally grounding
+- low-pressure
+- reflective
+
+The app should NOT feel:
+
+- corporate
+- gamified
+- noisy
+- dashboard-heavy
+- productivity obsessed
+- achievement-driven
+- AI-branded
+
+Avoid language like:
+
+- “optimize your life”
+- “10x your productivity”
+- “AI life coach”
+- “crush your week”
+- “habit streak”
+
+Prefer language like:
+
+- “reset your week”
+- “clear what you are carrying”
+- “choose what matters”
+- “enter the week with direction”
+- “you do not have to carry everything at once”
+
+---
+
+## 3. Feature Discipline
+
+When in doubt, do less.
+
+Prefer:
+- one calm ritual flow
+- simple local persistence
+- readable components
+- strong mobile UX
+- clear copy
+- thoughtful spacing
+
+Avoid:
+- configurable everything
+- complex settings
+- deep analytics
+- integrations
+- automation
+- social features
+- premature account systems
+
+Simplicity is part of the product moat.
+
+---
+
+# II. Technical Standards
+
+## 1. Tech Stack
+
+Use the v0 stack unless a task explicitly says otherwise.
+
+- Frontend: React, TypeScript, Vite
+- Styling: TailwindCSS
+- UI primitives: shadcn/ui and Radix where appropriate
+- State: Zustand
+- Animation: Framer Motion
+- Persistence: localStorage
+- Platform: PWA
+
+Do not introduce a backend in v0.
+
+Do not add AI providers in v0.
+
+Do not add authentication in v0.
+
+---
+
+## 2. TypeScript Standards
+
+- Use strict typing.
+- Avoid `any`.
+- Use `interface` for object shapes.
+- Use `type` for unions, intersections, and utility types.
+- Prefer named exports.
+- Keep types close to the feature they describe unless shared globally.
+- Treat state as immutable.
+
+If a value cannot be typed clearly, stop and clarify the model.
+
+---
+
+## 3. React Standards
+
+- Use functional components only.
+- Keep components small and readable.
+- Prefer composition over large conditional components.
+- Minimize `useEffect`.
+- Use `useMemo` and `useCallback` when referential stability matters.
+- Do not synchronize derived state unless necessary.
+- Do not introduce global state for purely local UI state.
+
+---
+
+## 4. State Management
+
+Use Zustand for:
+
+- current reset draft
+- current ritual step
+- completed reset history
+- preferences
+- onboarding flags
+
+Avoid:
+
+- Redux
+- complex state machines in v0
+- backend-driven state
+- premature sync abstractions
+
+All persisted state must have clear localStorage boundaries.
+
+---
+
+## 5. Persistence
+
+Use localStorage for v0.
+
+Recommended keys:
+
+- `sunday-reset:v0:current-session`
+- `sunday-reset:v0:session-history`
+- `sunday-reset:v0:preferences`
+- `sunday-reset:v0:onboarding`
+
+Persistence rules:
+
+- never store secrets
+- never assume localStorage always succeeds
+- handle missing/corrupt local data gracefully
+- provide a way to clear local data
+- provide a way to export user data as JSON if implemented
+
+---
+
+## 6. Styling Standards
+
+Use TailwindCSS.
+
+Prefer:
+
+- warm neutral surfaces
+- readable typography
+- generous spacing
+- soft borders
+- gentle shadows
+- rounded corners
+- mobile-first layouts
+
+Avoid:
+
+- dense dashboards
+- loud color palettes
+- excessive gradients
+- tiny text
+- corporate SaaS aesthetics
+- overuse of cards
+- arbitrary Tailwind values unless clearly justified
+
+Use a shared `cn()` utility for class merging if available.
+
+---
+
+## 7. Motion Standards
+
+Use Framer Motion sparingly.
+
+Good motion:
+
+- soft fade transitions
+- gentle step transitions
+- subtle completion feedback
+- calm pacing
+
+Avoid:
+
+- bouncing
+- flashy animations
+- gamified motion
+- excessive microinteractions
+
+Motion should reinforce calmness, not dopamine.
+
+---
+
+## 8. PWA Standards
+
+The app should be installable and mobile-friendly.
+
+PWA work should include:
+
+- manifest
+- icons
+- service worker or Vite PWA setup
+- offline-friendly loading where reasonable
+- responsive layout
+- mobile browser testing
+
+Do not let PWA setup dominate the product. Keep it simple.
+
+---
+
+## 9. Accessibility Standards
+
+All UI should be accessible by default.
+
+Requirements:
+
+- semantic HTML
+- visible focus states
+- keyboard navigability
+- proper labels for inputs
+- sufficient color contrast
+- buttons should be buttons
+- form controls should have labels or accessible names
+
+Do not trade accessibility for visual minimalism.
+
+---
+
+# III. Task Lifecycle
+
+## 1. Orientation Phase
+
+Before writing or modifying code, orient yourself.
+
+### Step 1.1: Read Context
+
+Read relevant files first, especially:
+
+- `docs/PRD_SUNDAY_RESET.md`
+- `docs/TECH_PLAN_SUNDAY_RESET.md`
+- existing components near the target area
+- existing store/types/utilities
+- existing tests, if any
+
+### Step 1.2: Restate the Task
+
+Before implementation, summarize:
+
+- what the task is asking for
+- what files are likely involved
+- what product constraints apply
+- what should intentionally remain out of scope
+- any risks or assumptions
+
+### Step 1.3: Plan Briefly
+
+Create a short implementation plan.
+
+The plan should be practical, not ceremonial.
+
+For small changes, 3-5 bullets is enough.
+
+For larger changes, include:
+
+- files to create/change
+- data model impact
+- UI impact
+- persistence impact
+- testing/validation plan
+
+---
+
+## 2. Execution Phase
+
+During implementation:
+
+- keep changes scoped
+- do not mix unrelated refactors with feature work
+- follow existing project conventions
+- prefer simple readable code
+- preserve product tone
+- do not introduce backend/AI/auth unless explicitly requested
+- do not silently expand scope
+
+### Scout Rule
+
+When modifying a file, you may clean up small adjacent issues only if they are directly related and low risk.
+
+Do not use the scout rule as an excuse for broad refactors.
+
+---
+
+## 3. Validation Phase
+
+A task is not complete until validated.
+
+At minimum:
+
+- run typecheck if available
+- run tests if available
+- run lint if available
+- manually verify the changed flow when UI is affected
+- document what was validated
+
+If a validation step cannot be run, say so clearly.
+
+Do not claim browser verification unless it actually happened.
+
+Do not claim tests passed unless they actually ran.
+
+Honest incomplete validation is better than false confidence.
+
+---
+
+# IV. Testing Guidance
+
+Testing should focus on behavior, not implementation details.
+
+Prefer testing:
+
+- reset flow progression
+- localStorage persistence
+- reset completion
+- history display
+- settings/data controls
+- core pure utilities
+
+Avoid brittle tests based on:
+
+- exact copy unless copy is the feature
+- implementation internals
+- fragile animation timing
+
+Recommended test stack:
+
+- Vitest
+- Testing Library
+- user-event
+
+Suggested commands, if present:
+
+- `npm run typecheck`
+- `npm run lint`
+- `npm run test`
+- `npm run build`
+
+Do not invent scripts. Check `package.json`.
+
+---
+
+# V. Sunday Reset Domain Model
+
+The app is organized around a weekly reset ritual.
+
+Recommended reset steps:
+
+1. Brain Unload
+2. Reflection
+3. Re-Center
+4. Choose the Week
+5. Closure
+
+Suggested model:
+
+```ts
+export interface ResetSession {
+  id: string;
+    createdAt: string;
+      completedAt?: string;
+
+        unload: string[];
+
+          reflections: {
+              mattered: string;
+                  drained: string;
+                      peace: string;
+                          avoidNextWeek: string;
+                            };
+
+                              recenter: {
+                                  family?: string;
+                                      meals?: string;
+                                          finances?: string;
+                                              faith?: string;
+                                                  schedule?: string;
+                                                      relationships?: string;
+                                                        };
+
+                                                          focuses: {
+                                                              topThree: string[];
+                                                                  simplify: string;
+                                                                      prioritizeRelationship: string;
+                                                                          avoid: string;
+                                                                            };
+
+                                                                              closure: {
+                                                                                  closingThought?: string;
+                                                                                      completed: boolean;
+                                                                                        };
+                                                                                        }
+
+                                                                                        export type ResetStep =
+                                                                                          | "brain-unload"
+                                                                                            | "reflection"
+                                                                                              | "recenter"
+                                                                                                | "choose-week"
+                                                                                                  | "closure";
+                                                                                                  ```
+
+                                                                                                  Keep the model small until real usage proves more is needed.
+
+                                                                                                  ---
+
+                                                                                                  # VI. What Not To Build Yet
+
+                                                                                                  Do not add these in v0:
+
+                                                                                                  - login
+                                                                                                  - user accounts
+                                                                                                  - backend database
+                                                                                                  - cloud sync
+                                                                                                  - AI calls
+                                                                                                  - OpenAI/Anthropic integration
+                                                                                                  - payment handling
+                                                                                                  - subscription logic
+                                                                                                  - notifications
+                                                                                                  - calendar integration
+                                                                                                  - collaboration
+                                                                                                  - sharing
+                                                                                                  - streaks
+                                                                                                  - badges
+                                                                                                  - social features
+                                                                                                  - admin panel
+                                                                                                  - complex analytics
+                                                                                                  - recommendation engine
+
+                                                                                                  These may be considered later, but only after v0 validates weekly retention.
+
+                                                                                                  ---
+
+                                                                                                  # VII. AI / Guided Feature Policy
+
+                                                                                                  Version 0 has no guided AI system.
+
+                                                                                                  Future guided features may be added later, but they must not be framed as:
+
+                                                                                                  - AI coach
+                                                                                                  - AI therapist
+                                                                                                  - AI productivity assistant
+                                                                                                  - AI life optimizer
+
+                                                                                                  Preferred framing:
+
+                                                                                                  - Guided Reflection
+                                                                                                  - Weekly Insight
+                                                                                                  - Clarity Guide
+                                                                                                  - Guided Reset
+
+                                                                                                  If guided features are added later:
+
+                                                                                                  - AI calls must happen server-side
+                                                                                                  - API keys must never be exposed in the client
+                                                                                                  - usage must be rate-limited
+                                                                                                  - prompt cost must be bounded
+                                                                                                  - abuse prevention must be considered
+                                                                                                  - the base app must remain useful without AI
+
+                                                                                                  ---
+
+                                                                                                  # VIII. Code Review Checklist
+
+                                                                                                  Before considering work complete, check:
+
+                                                                                                  - Does this preserve the calm ritual feel?
+                                                                                                  - Did this avoid unnecessary complexity?
+                                                                                                  - Does this work on mobile?
+                                                                                                  - Is localStorage handled safely?
+                                                                                                  - Is TypeScript strict and readable?
+                                                                                                  - Are components small enough?
+                                                                                                  - Are accessibility basics covered?
+                                                                                                  - Did this avoid backend/auth/AI creep?
+                                                                                                  - Were relevant validation commands run?
+                                                                                                  - Were limitations or skipped validations clearly stated?
+
+                                                                                                  ---
+
+                                                                                                  # IX. Final Response Format for Agents
+
+                                                                                                  When finishing a task, report:
+
+                                                                                                  1. Summary of what changed
+                                                                                                  2. Files changed
+                                                                                                  3. Validation performed
+                                                                                                  4. Anything intentionally left out
+                                                                                                  5. Risks or follow-ups
+
+                                                                                                  Example:
+
+                                                                                                  ```md
+                                                                                                  ## Summary
+                                                                                                  Implemented the Brain Unload step and persisted draft reset state locally.
+
+                                                                                                  ## Files Changed
+                                                                                                  - `src/features/reset/components/BrainUnloadStep.tsx`
+                                                                                                  - `src/store/resetStore.ts`
+                                                                                                  - `src/lib/storage.ts`
+
+                                                                                                  ## Validation
+                                                                                                  - Ran `npm run typecheck`
+                                                                                                  - Ran `npm run test`
+                                                                                                  - Manually verified adding/removing unload items in browser
+
+                                                                                                  ## Intentionally Left Out
+                                                                                                  - No backend
+                                                                                                  - No auth
+                                                                                                  - No AI guidance
+                                                                                                  - No cloud sync
+
+                                                                                                  ## Follow-ups
+                                                                                                  - Add completion screen polish
+                                                                                                  - Add mobile spacing refinement
+                                                                                                  ```
+
+                                                                                                  ---
+
+                                                                                                  # X. Guiding Principle
+
+                                                                                                  Choose:
+
+                                                                                                  - calm over clever
+                                                                                                  - ritual over productivity
+                                                                                                  - clarity over features
+                                                                                                  - local-first over infrastructure
+                                                                                                  - emotional relief over dashboards
+                                                                                                  - simplicity over scalability
+
+                                                                                                  Simplicity is a feature.
